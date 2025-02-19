@@ -68,7 +68,7 @@ jobs:
           context: .  # Set root context to include all necessary files
           file: alpine-fips/Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64,linux/s390x  # Multi-architecture support
+          platforms: linux/amd64,linux/arm64  # Multi-architecture support
           build-args: |
             BUILD_OS=${{ env.BUILD_OS }}
             OPENSSL_VERSION=${{ env.OPENSSL_VERSION }}
