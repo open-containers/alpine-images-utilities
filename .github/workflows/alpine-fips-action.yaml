@@ -46,13 +46,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and push the OpenSSL-FIPS image from `alpine-images-utilities/alpine-fips/`
+      # Build and push the OpenSSL-FIPS image from `alpine-fips/`
       - name: Build and push OpenSSL-FIPS container image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
-          context: alpine-images-utilities/alpine-fips/
-          file: alpine-images-utilities/alpine-fips/Dockerfile
+          context: alpine-fips/
+          file: alpine-fips/Dockerfile
           push: true
           build-args: |
             BUILD_OS=${{ env.BUILD_OS }}
