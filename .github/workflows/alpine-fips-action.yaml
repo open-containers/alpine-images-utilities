@@ -1,4 +1,4 @@
-name: build-push-openssl-fips
+name: build-push-sign-openssl-fips-alpine
 
 on:
   schedule:
