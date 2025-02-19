@@ -7,14 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-push-openssl-fips:
+  build-push-alpine-gitlab-runner:
     env:
       REGISTRY: ghcr.io
       ORG: open-containers
-      IMAGE: openssl-fips
-      TAG: "v3.0.9"
+      IMAGE: alpine-gitlab-runner
+      TAG: "v3.21"
       BUILD_OS: alpine:3.21
-      OPENSSL_VERSION: 3.0.9
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -50,7 +49,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and push the OpenSSL-FIPS image
-      - name: Build and push OpenSSL-FIPS container image
+      - name: Build and push alpine-gitlab-runner container image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
