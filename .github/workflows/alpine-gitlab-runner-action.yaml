@@ -29,14 +29,6 @@ jobs:
           fetch-depth: 0  # Ensure full history
           lfs: true        # Ensure Large File Storage (LFS) files are included
 
-      # Verify that the required file exists before building
-      - name: Verify openssl.cnf file exists
-        run: |
-          if [ ! -f alpine-gitlab-runner/openssl.cnf ]; then
-            echo "Error: openssl.cnf file not found!"
-            exit 1
-          fi
-
       # Set up QEMU for multi-arch builds
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
