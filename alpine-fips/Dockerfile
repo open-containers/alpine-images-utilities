@@ -19,6 +19,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk upgrade --no-cache -U
 
 # copy local config file for the openssl configurations that contain the fips configs 
-COPY docker_includes/openssl.cnf /etc/ssl/openssl.cnf
+COPY alpine-fips/openssl.cnf /etc/ssl/openssl.cnf
 
 
