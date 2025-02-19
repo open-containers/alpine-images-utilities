@@ -22,9 +22,20 @@ jobs:
       packages: write
       id-token: write
     steps:
-      # Checkout the repository
+      # Checkout the repository (Ensure all files are available)
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ensure full history
+          lfs: true        # Ensure Large File Storage (LFS) files are included
+
+      # Verify that the required file exists before building
+      - name: Verify openssl.cnf file exists
+        run: |
+          if [ ! -f alpine-fips/openssl.cnf ]; then
+            echo "Error: openssl.cnf file not found!"
+            exit 1
+          fi
 
       # Set up QEMU for multi-arch builds
       - name: Set up QEMU
@@ -46,13 +57,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and push the OpenSSL-FIPS image from `alpine-fips/`
+      # Build and push the OpenSSL-FIPS image
       - name: Build and push OpenSSL-FIPS container image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
-          context: alpine-fips/
-          file: alpine-fips/Dockerfile
+          context: .  # Set to the root of the repo to include all files
+          file: alpine-fips/Dockerfile  # Specify the correct Dockerfile path
           push: true
           build-args: |
             BUILD_OS=${{ env.BUILD_OS }}
