@@ -8,7 +8,7 @@ FROM ${BUILD_OS} AS builder
 ARG OPENSSL_VERSION
 
 # Install dependencies and crane
-RUN apk add --no-cache curl jq aws-cli docker-cli && \
+RUN apk add --no-cache curl jq && \
     curl -L https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz | tar xz && \
     mv crane /usr/local/bin/crane
 
