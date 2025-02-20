@@ -19,14 +19,14 @@ FROM gcr.io/kaniko-project/executor:v1.23.2-debug AS kaniko
 COPY --from=builder /usr/local/bin/crane /usr/local/bin/crane
 
 # Manually create non-root user and set up /etc/passwd if missing
-RUN [ ! -f /etc/passwd ] && echo "Creating /etc/passwd file..." && echo "root:x:0:0:root:/root:/bin/sh" > /etc/passwd || true
+# RUN [ ! -f /etc/passwd ] && echo "Creating /etc/passwd file..." && echo "root:x:0:0:root:/root:/bin/sh" > /etc/passwd || true
 
-RUN echo "craneuser:x:1000:1000:Crane User:/home/craneuser:/bin/sh" >> /etc/passwd && \
-    mkdir -p /home/craneuser && \
-    chown -R 1000:1000 /home/craneuser
+# RUN echo "craneuser:x:1000:1000:Crane User:/home/craneuser:/bin/sh" >> /etc/passwd && \
+#     mkdir -p /home/craneuser && \
+#     chown -R 1000:1000 /home/craneuser
 
 # Switch to non-root user
-USER 1000
+# USER 1000
 
 # Set the entry point to Kaniko
 ENTRYPOINT ["/kaniko/executor"]
